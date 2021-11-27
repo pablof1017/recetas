@@ -18,7 +18,7 @@
 }
 
 #nav {
-  padding: 20px;
+  padding: 15px;
   background-color: #66806A;
 }
 
@@ -31,7 +31,7 @@
 #nav a {
   text-decoration: none;
   padding: 10px;
-  font-size: 20px;
+  font-size: 15px;
   font-weight: bold;
   color: #2a3a2b;
 }

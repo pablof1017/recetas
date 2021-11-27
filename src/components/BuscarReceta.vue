@@ -25,12 +25,12 @@
           <button type="submit" @click="buscarReceta(nombre,picked,checkedIng)">Buscar</button>
         </div>
         
-          <div class="recetas" v-for="(receta, index) in recetasFiltradas" v-bind:key="index">
-              <h4>Foto: {{receta.foto}}</h4>
-              <h4>Nombre: {{receta.nombre}}</h4>
-              <h4>Tipo: {{receta.picked}}</h4>
-              <h4>Ingredientes: {{receta.checkedIng}}</h4>
-          </div>
+        <div class="recetas" v-for="(receta, index) in recetasFiltradas" v-bind:key="index">
+          <h4>Foto: {{receta.foto}}</h4>
+          <h4>Nombre: {{receta.nombre}}</h4>
+          <h4>Tipo: {{receta.picked}}</h4>
+          <h4>Ingredientes: {{receta.checkedIng}}</h4>
+        </div>
         
       </div>
       
@@ -55,27 +55,25 @@ export default {
   methods: {
     buscarReceta (nombre,picked,checkedIng) {
       let recetas = JSON.parse(localStorage.getItem("recetas-vue"));
-
+      
       const result = recetas.filter(receta => {
-        // console.log(receta.checkedIng[1] + " receta.checkedIng" )
-        // console.log(checkedIng + " checkedIng" )
 
         let hasAllElems = true;
-
-
+        
         for (let i = 0; i <  checkedIng.length; i++){  
           if (receta.checkedIng.indexOf(checkedIng[i]) === -1) {
             hasAllElems = false;
             break;
           } 
         }
-        console.log(hasAllElems);
-
+        
+        // console.log(hasAllElems);
         return receta.nombre.includes(nombre) && receta.picked.includes(picked) && hasAllElems
       })
       this.recetasFiltradas = result 
      
-      console.log(this.recetasFiltradas)
+      // console.log(this.recetasFiltradas)
+
       return 
     } 
   }
@@ -89,11 +87,14 @@ export default {
 }
 
 h1 {
-  padding: 20px;
+  padding: 10px;
   font-weight: 600;
+  font-size: 30px;
 }
 .container {
-  margin-top: 50px;
+  max-width: 800px;
+  margin: auto;
+  margin-top: 30px;
   padding: 10px;
   background-color: #e2decd;
   border-radius: 20px;
@@ -111,7 +112,7 @@ input[type="radio"] {
   margin: 10px auto;
   margin-top: 30px;
   background: #fff;
-  width: 180px;
+  width: 150px;
   border-radius: 10px;
 }
 
@@ -121,7 +122,7 @@ input[type="radio"] {
   padding: 6px;
   display: inline-block;
   position: relative;
-  font-size: 20px;
+  font-size: 15px;
   border-radius: 8px;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -144,7 +145,7 @@ input[type="radio"]:checked + label:before {
   padding: 5px 10px 5px 45px;
   display: inline-block;
   position: relative;
-  font-size: 20px;
+  font-size: 15px;
   border-radius: 8px;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -164,7 +165,7 @@ input[type="radio"]:checked + label:before {
   border-radius: 50%;
   position: absolute;
   left: 20px;
-  top: 12px;
+  top: 7px;
 }
 
 .checkbox label:before {
@@ -185,11 +186,12 @@ input[type="checkbox"]:checked + label:before {
 .buscar {
   border-radius: 8px;
   color: #c3d6b4;
-  padding: 20px;
+  padding: 10px;
   margin: 10px;
   background-color: #94a587;
 }
 .nombre-input {
+  font-size: 20px;
 	display: block;
 	width: 70%;
 	padding: 10px;
@@ -200,7 +202,7 @@ input[type="checkbox"]:checked + label:before {
 	border-bottom: 2px solid #c3d6b4;
 	background: transparent;
 	outline: none;
-	transition: background 0.4s;
+	transition: 0.4s;
 	color: white;
 }
 
@@ -220,7 +222,7 @@ input[type="checkbox"]:checked + label:before {
 
 button[type="submit"] {
   border: none;
-  font-size: 25px;
+  font-size: 20px;
   margin-top: 15px;
   margin-bottom: 20px;
 	width: 30%;
@@ -234,7 +236,21 @@ button[type="submit"] {
 button[type="submit"]:hover {
 	background: #78917b;
 	color:  white;
-  transition: background 0.3s;
+  transition: 0.3s;
+}
+
+.recetas {
+  display: inline-block;
+  width: 250px;
+  border-radius: 8px;
+  color: #394d3c;
+  padding: 15px 15px 5px;
+  margin: 10px 40px;
+  background-color: #c5d3c8;
+  text-align: left;
+}
+h4 {
+  font-size: 15px;
 }
 
 </style>

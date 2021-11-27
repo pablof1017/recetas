@@ -94,10 +94,13 @@ export default {
       }
       this.recetas.push(data);
       this.nombre = "";
-      this.checkedIng.value = [];
+      this.checkedIng = [];
       this.picked = "";
       this.foto = ""
-      
+
+      let checkedIng = ["banana","pan","azucar","lentejas","salsa"];
+      console.log(checkedIng.join())
+  
       localStorage.setItem("recetas-vue", JSON.stringify(this.recetas));
     },
     eliminarReceta(id) {  
@@ -125,13 +128,15 @@ export default {
 }
 
 .tabla {
+  max-width: 800px;
+  margin: auto;
   margin-top: 20px;
   background: #e2decd;
   border-radius: 20px;
   display: flex;
 }
 
-.recetas {
+.recetas { 
   position: relative;
   border-radius: 8px;
   color: #394d3c;
@@ -149,12 +154,15 @@ img {
 }
 
 h1 {
-  padding: 20px;
+  padding: 10px;
   font-weight: 600;
+  font-size: 30px;
 }
 
 .form {
-  margin-top: 50px;
+  margin: auto;
+  max-width: 800px;
+  margin-top: 30px;
   padding: 10px;
   background-color: #e2decd;
   border-radius: 20px;
@@ -169,6 +177,7 @@ h1 {
 }
 
 .nombre-input {
+  font-size: 20px;
 	display: block;
 	width: 70%;
 	padding: 10px;
@@ -179,7 +188,7 @@ h1 {
 	border-bottom: 2px solid #c3d6b4;
 	background: transparent;
 	outline: none;
-	transition: background 0.4s;
+	transition: 0.4s;
 	color: white;
 }
 
@@ -226,7 +235,7 @@ h1 {
   padding: 5px 10px 5px 45px;
   display: inline-block;
   position: relative;
-  font-size: 20px;
+  font-size: 15px;
   border-radius: 8px;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -250,7 +259,7 @@ h1 {
   border-radius: 50%;
   position: absolute;
   left: 20px;
-  top: 12px;
+  top: 8px;
 }
 
 .form .checkbox label:before {
@@ -282,13 +291,17 @@ h1 {
   background-color: #c5d3c8;
 }
 
+h4 {
+  font-size: 15px;
+}
+
 button[type="submit"] {
   border: none;
-  font-size: 25px;
+  font-size: 20px;
   margin-top: 15px;
   margin-bottom: 20px;
-	width: 40%;
-	padding: 15px;
+	width: 150px;
+	padding: 10px;
   border-radius: 8px;
 	background: #546657;
 	color: #fff;
@@ -298,6 +311,13 @@ button[type="submit"] {
 button[type="submit"]:hover {
 	background: #78917b;
 	color:  white;
-  transition: background 0.3s;
+  transition: 0.3s;
 }
+
+/* @media (max-width: 600px) {
+    .container {
+     display: block;
+    }  
+} */
+
 </style>
