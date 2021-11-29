@@ -47,9 +47,9 @@
         <div class="tabla">
             <div class="recetas" v-for="(receta, index) in recetas" v-bind:key="index">
               <div :class="receta.foto == '1'? 'background-1': 'background-2'"></div>
-              <h4>Nombre: {{receta.nombre}}</h4>
-              <h4>Tipo: {{receta.picked}}</h4>   
-              <h4>Ingredientes: {{receta.checkedIng.join(", ")}}</h4>
+              <h4><b>Nombre:</b> {{receta.nombre}}</h4>
+              <h4><b>Tipo:</b> {{receta.picked}}</h4>   
+              <h4><b>Ingredientes:</b> {{receta.checkedIng.join(", ")}}</h4>
               <span class="btn-delete" title="Eliminar" role="button" @click="eliminarReceta(receta.id)"><i class="fas fa-times"></i></span>    
             </div>
         </div>      
@@ -140,8 +140,7 @@ export default {
   margin: auto;
   margin-top: 20px;
   background: #e2decd;
-  border-radius: 20px;
-  
+  border-radius: 20px;  
 }
 
 .recetas { 
@@ -149,8 +148,10 @@ export default {
   width: 250px;
   border-radius: 8px;
   color: #394d3c;
-  padding: 15px 15px 5px;
-  margin: 10px 40px;
+  padding-top: 10px;
+  padding-left: 10px;
+  padding-bottom: 10px;
+  margin: 10px 40px; 
   background-color: #c5d3c8;
   text-align: left;
 }

@@ -26,9 +26,9 @@
         </div>       
         <div class="recetas" v-for="(receta, index) in recetasFiltradas" v-bind:key="index">
           <div :class="receta.foto == '1'? 'background-1': 'background-2'"></div>
-          <h4>Nombre: {{receta.nombre}}</h4>
-          <h4>Tipo: {{receta.picked}}</h4>
-          <h4>Ingredientes: {{receta.checkedIng.join(", ")}}</h4>
+          <h4><b>Nombre:</b> {{receta.nombre}}</h4>
+          <h4><b>Tipo:</b> {{receta.picked}}</h4>
+          <h4><b>Ingredientes:</b> {{receta.checkedIng.join(", ")}}</h4>
         </div>   
       </div>     
 </template>
@@ -262,9 +262,10 @@ button[type="submit"]:hover {
 .recetas {
   display: inline-block;
   width: 250px;
+  padding-top: 10px;
+  padding-left: 10px;
   border-radius: 8px;
   color: #394d3c;
-  padding: 15px 15px 5px;
   margin: 10px 40px;
   background-color: #c5d3c8;
   text-align: left;
