@@ -39,11 +39,11 @@
             <div class="container-img">
               <h4>Foto:</h4>
               <div class="img">
-                <img src="@/assets/pan.jpg" alt="pan"> 
-                <input type="radio" id="foto-1" value="Foto-1" v-model="foto">
+                <img src="../assets/pan.jpg" alt="Pan de banana" title="Pan de banana"> 
+                <input type="radio" id="foto-1" value="1" v-model="foto">
                 <label for="foto-1">Foto 1</label>
-                <img src="@/assets/guiso.jpg" alt="guiso">
-                <input type="radio" id="foto-2" value="Foto-2" v-model="foto">
+                <img src="../assets/guiso.jpg" alt="Guiso de lentejas" title="Guiso de lentejas">
+                <input type="radio" id="foto-2" value="2" v-model="foto">
                 <label for="foto-2">Foto 2</label>
               </div>
             </div>
@@ -53,10 +53,12 @@
         <div class="tabla">
             <div class="recetas" v-for="(receta, index) in recetas" v-bind:key="index">
               <div>{{receta.foto}}</div>
+              
+              <div :class="receta.foto == '1'? 'background-1': 'background-2'"></div>
               <div>Nombre: {{receta.nombre}}</div>
-              <div>Tipo:{{receta.picked}}</div>   
-              <div>Ingredientes: {{receta.checkedIng}}</div>
-              <span role="button" @click="eliminarReceta(receta.id)"><i class="fas fa-times"></i></span>    
+              <div>Tipo: {{receta.picked}}</div>   
+              <div>Ingredientes: {{receta.checkedIng.join(", ")}}</div>
+              <span class="btn-delete" title="Eliminar" role="button" @click="eliminarReceta(receta.id)"><i class="fas fa-times"></i></span>    
             </div>
         </div>      
       </div>    
@@ -96,11 +98,8 @@ export default {
       this.nombre = "";
       this.checkedIng = [];
       this.picked = "";
-      this.foto = ""
+      this.foto = "";
 
-      let checkedIng = ["banana","pan","azucar","lentejas","salsa"];
-      console.log(checkedIng.join())
-  
       localStorage.setItem("recetas-vue", JSON.stringify(this.recetas));
     },
     eliminarReceta(id) {  
@@ -127,6 +126,18 @@ export default {
   box-sizing: border-box;
 }
 
+.background-1 {
+  width: 150px;
+  height: 150px;
+  background-image: url("../assets/pan.jpg");
+}
+
+.background-2{
+  width: 150px;
+  height: 150px;
+  background-image: url("../assets/guiso.jpg");
+}
+
 .tabla {
   max-width: 800px;
   margin: auto;
@@ -144,6 +155,21 @@ export default {
   margin: 10px auto;
   background-color: #c5d3c8;
   text-align: left;
+}
+
+.btn-delete {
+  width: 50px;
+  display: flex;
+  margin: auto;
+  padding: 5px;
+  background: #7f9e84;
+  justify-content: center;
+  border-radius: 5px;
+}
+
+.btn-delete:hover {
+  background: #92b498;
+  transition: 0.3s;
 }
 
 img {
@@ -313,11 +339,5 @@ button[type="submit"]:hover {
 	color:  white;
   transition: 0.3s;
 }
-
-/* @media (max-width: 600px) {
-    .container {
-     display: block;
-    }  
-} */
 
 </style>

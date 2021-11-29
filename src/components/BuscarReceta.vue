@@ -1,8 +1,8 @@
 <template>
       <div class="container">
         <h1>{{ msg }}</h1>
-        <div @submit.prevent="buscarReceta" class="buscar">
-          <input type="text" v-model="nombre" placeholder="🔎..." class="nombre-input">           
+        <form @submit.prevent="buscarReceta" class="buscar">
+          <input type="text" v-model.trim="nombre" placeholder="🔎..." class="nombre-input" required>           
           <div class="radio">
             <input type="radio" id="dulce" value="Dulce" v-model="picked">
             <label for="dulce">Dulce</label>
@@ -23,13 +23,13 @@
             <label for="salsa">Salsa</label>
           </div>  
           <button type="submit" @click="buscarReceta(nombre,picked,checkedIng)">Buscar</button>
-        </div>
+        </form>
         
         <div class="recetas" v-for="(receta, index) in recetasFiltradas" v-bind:key="index">
           <h4>Foto: {{receta.foto}}</h4>
           <h4>Nombre: {{receta.nombre}}</h4>
           <h4>Tipo: {{receta.picked}}</h4>
-          <h4>Ingredientes: {{receta.checkedIng}}</h4>
+          <h4>Ingredientes: {{receta.checkedIng.join(", ")}}</h4>
         </div>
         
       </div>
@@ -60,12 +60,15 @@ export default {
 
         let hasAllElems = true;
         
-        for (let i = 0; i <  checkedIng.length; i++){  
-          if (receta.checkedIng.indexOf(checkedIng[i]) === -1) {
-            hasAllElems = false;
-            break;
-          } 
-        }
+       
+          for (let i = 0; i < checkedIng && checkedIng.length; i++){  
+            if (receta.checkedIng.indexOf(checkedIng[i]) === -1) {
+              hasAllElems = false;
+              break;
+            } 
+          }
+         
+          
         
         // console.log(hasAllElems);
         return receta.nombre.includes(nombre) && receta.picked.includes(picked) && hasAllElems
@@ -188,7 +191,7 @@ input[type="checkbox"]:checked + label:before {
   color: #c3d6b4;
   padding: 10px;
   margin: 10px;
-  background-color: #94a587;
+  background-color: #7b9c73;
 }
 .nombre-input {
   font-size: 20px;
