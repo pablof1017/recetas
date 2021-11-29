@@ -1,1 +1,1 @@
-Versión beta proyecto Recetas.
+Upgrade 2 proyecto Recetas.

@@ -1,8 +1,8 @@
 <template>
       <div class="container">
         <h1>{{ msg }}</h1>
-        <form @submit.prevent="buscarReceta" class="buscar">
-          <input type="text" v-model.trim="nombre" placeholder="🔎..." class="nombre-input" required>           
+        <div @submit.prevent="buscarReceta" class="buscar">
+          <input type="text" v-model.trim="nombre" placeholder="🔎 Nombre..." class="nombre-input" required>           
           <div class="radio">
             <input type="radio" id="dulce" value="Dulce" v-model="picked">
             <label for="dulce">Dulce</label>
@@ -23,17 +23,14 @@
             <label for="salsa">Salsa</label>
           </div>  
           <button type="submit" @click="buscarReceta(nombre,picked,checkedIng)">Buscar</button>
-        </form>
-        
+        </div>       
         <div class="recetas" v-for="(receta, index) in recetasFiltradas" v-bind:key="index">
-          <h4>Foto: {{receta.foto}}</h4>
+          <div :class="receta.foto == '1'? 'background-1': 'background-2'"></div>
           <h4>Nombre: {{receta.nombre}}</h4>
           <h4>Tipo: {{receta.picked}}</h4>
           <h4>Ingredientes: {{receta.checkedIng.join(", ")}}</h4>
-        </div>
-        
-      </div>
-      
+        </div>   
+      </div>     
 </template>
 
 <script>
@@ -54,30 +51,27 @@ export default {
   },
   methods: {
     buscarReceta (nombre,picked,checkedIng) {
-      let recetas = JSON.parse(localStorage.getItem("recetas-vue"));
+      if (nombre) {
+        let recetas = JSON.parse(localStorage.getItem("recetas-vue"));
       
-      const result = recetas.filter(receta => {
+        const result = recetas.filter(receta => {
 
-        let hasAllElems = true;
+          let hasAllElems = true;
         
-       
-          for (let i = 0; i < checkedIng && checkedIng.length; i++){  
+          for (let i = 0; i < checkedIng.length; i++){  
             if (receta.checkedIng.indexOf(checkedIng[i]) === -1) {
               hasAllElems = false;
               break;
             } 
           }
-         
-          
-        
-        // console.log(hasAllElems);
         return receta.nombre.includes(nombre) && receta.picked.includes(picked) && hasAllElems
-      })
+      });
       this.recetasFiltradas = result 
-     
-      // console.log(this.recetasFiltradas)
-
-      return 
+      return;
+      } else {
+        alert("Busca con el nombre de la receta.");
+        return;
+      }      
     } 
   }
 }
@@ -87,6 +81,29 @@ export default {
 
 * {
   box-sizing: border-box;
+}
+
+.background-1 {
+  width: 150px;
+  height: 150px;
+  background-image: url("../assets/pan.jpg");
+  border-radius: 10px;
+  box-shadow: 0px 0px 5px 0px black;
+  background-size: cover;
+}
+
+.background-2{
+  width: 150px;
+  height: 150px;
+  background-image: url("../assets/guiso.jpg");
+  border-radius: 10px;
+  box-shadow: 0px 0px 5px 0px black;
+  background-size: cover;
+}
+
+h4 {
+  margin-top: 10px;
+  font-size: 15px;
 }
 
 h1 {
@@ -251,9 +268,6 @@ button[type="submit"]:hover {
   margin: 10px 40px;
   background-color: #c5d3c8;
   text-align: left;
-}
-h4 {
-  font-size: 15px;
 }
 
 </style>

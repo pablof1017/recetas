@@ -2,14 +2,11 @@
   <div class="crear">
       <div class="container">
         <form @submit.prevent="agregarReceta" class="form">
-
             <h1>{{ msg }}</h1>
-
             <div class="nombre">
               <h4>Nombre:</h4>          
               <input type="text" v-model.trim="nombre" placeholder="Escribe un nombre..." class="nombre-input" required>
             </div>
-
             <div class="container-ing">
               <h4>Ingredientes:</h4>
               <div class="checkbox">           
@@ -25,7 +22,6 @@
                 <label for="salsa">Salsa</label>
               </div>          
             </div>
-
             <div class="container-tipo">
               <h4>Tipo:</h4>
               <div class="radio">
@@ -35,7 +31,6 @@
                 <label for="salado">Salado</label>
               </div>
             </div>
-
             <div class="container-img">
               <h4>Foto:</h4>
               <div class="img">
@@ -49,15 +44,12 @@
             </div>
             <button class="boton" type="submit">Crear</button>
         </form>
-
         <div class="tabla">
             <div class="recetas" v-for="(receta, index) in recetas" v-bind:key="index">
-              <div>{{receta.foto}}</div>
-              
               <div :class="receta.foto == '1'? 'background-1': 'background-2'"></div>
-              <div>Nombre: {{receta.nombre}}</div>
-              <div>Tipo: {{receta.picked}}</div>   
-              <div>Ingredientes: {{receta.checkedIng.join(", ")}}</div>
+              <h4>Nombre: {{receta.nombre}}</h4>
+              <h4>Tipo: {{receta.picked}}</h4>   
+              <h4>Ingredientes: {{receta.checkedIng.join(", ")}}</h4>
               <span class="btn-delete" title="Eliminar" role="button" @click="eliminarReceta(receta.id)"><i class="fas fa-times"></i></span>    
             </div>
         </div>      
@@ -119,7 +111,6 @@ export default {
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 
 * {
@@ -130,12 +121,18 @@ export default {
   width: 150px;
   height: 150px;
   background-image: url("../assets/pan.jpg");
+  border-radius: 10px;
+  box-shadow: 0px 0px 5px 0px black;
+  background-size: cover;
 }
 
 .background-2{
   width: 150px;
   height: 150px;
   background-image: url("../assets/guiso.jpg");
+  border-radius: 10px;
+  box-shadow: 0px 0px 5px 0px black;
+  background-size: cover;
 }
 
 .tabla {
@@ -144,15 +141,16 @@ export default {
   margin-top: 20px;
   background: #e2decd;
   border-radius: 20px;
-  display: flex;
+  
 }
 
 .recetas { 
-  position: relative;
+  display: inline-block;
+  width: 250px;
   border-radius: 8px;
   color: #394d3c;
-  padding: 10px;
-  margin: 10px auto;
+  padding: 15px 15px 5px;
+  margin: 10px 40px;
   background-color: #c5d3c8;
   text-align: left;
 }
@@ -319,6 +317,7 @@ h1 {
 
 h4 {
   font-size: 15px;
+  margin-top: 10px;
 }
 
 button[type="submit"] {
